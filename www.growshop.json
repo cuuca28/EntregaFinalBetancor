@@ -1,0 +1,14 @@
+[
+    {"id":1, "nombre":"Blunt", "cantidad":1, "precio":120, "stock":10, "img":"./assets/img/blunt.webp", "descripcion": "Hojilas del tipo blunt para enrolar x2", "alt":"hojillas tipo blunt"},
+    {"id":2, "nombre":"Extractor", "cantidad":1, "precio":1500, "stock":10, "img":"./assets/img/extractor.webp", "descripcion": "Extractor de humedad para tu indoor", "alt":"extractor de humedad"},
+    {"id":3, "nombre":"Kit fertilizantes", "cantidad":1, "precio": 1750, "stock":10, "img":"./assets/img/fertilizantes.webp", "descripcion":"Kit de fertilizantes para fortalecer tus plantas", "alt":"kit fertilizantes"},
+    {"id":4, "nombre":"Caja hojillas", "cantidad": 1, "precio":3000, "stock":10, "img":"./assets/img/hojillas.webp", "descripcion":"Caja de hojillas comunes con goma natural", "alt":"hojillas comunes"},
+    {"id":5, "nombre":"Indoor","cantidad":1, "precio":10000, "stock":10, "img":"./assets/img/indoor.webp", "descripcion":"Indoor tamaño grande", "alt":"indoor grande"},
+    {"id":6, "nombre":"Maceta", "cantidad":1, "precio": 130, "stock":10, "img":"./assets/img/maceta.webp", "descripcion": "Maceta tamaño mediano", "alt":"maceta mediana"},
+    {"id":7, "nombre":"Tierra","cantidad":1, "precio":1600, "stock":10, "img":"./assets/img/tierra.webp", "descripcion":"Bolsa de tierra 25 kg", "alt":"tierra"},
+    {"id":8, "nombre":"Sobre bóveda 62%","cantidad":1, "precio": 250, "stock":10, "img":"./assets/img/boveda-62.webp", "descripcion":"Sobre bóveda para mantener humedad al 62%", "alt":"sobre boveda 62%"}
+
+]
+
+
+

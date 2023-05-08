@@ -17,6 +17,14 @@ class ProductoController{
         this.contenedor_productos = document.getElementById("contenedor_productos")
     }
 
+    async levantar_y_mostrar(controladorCarrito){
+        const resp = await fetch("www.growshop.json")
+        this.listaProductos = await resp.json()
+
+        this.mostrarEnDOM()
+        this.darEventoClickAProductos(controladorCarrito)
+    }
+
     levantarProductos(){
         this.listaProductos = [
             new Producto(1, "Blunt", 120, 10, "./assets/img/blunt.webp", "Hojilas del tipo blunt para enrolar x2", "hojillas tipo blunt"),
@@ -53,6 +61,18 @@ class ProductoController{
                 controladorCarrito.agregar(producto)
                 controladorCarrito.guardarEnStorage()
                 controladorCarrito.mostrarEnDOM(contenedor_carrito)
+
+                Toastify({
+                    text: `${producto.nombre} añadido!`,
+                    duration: 3000,
+
+                    gravity: "bottom",
+                    position: "right",
+
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             })
         })
     }
@@ -60,12 +80,35 @@ class ProductoController{
 
 class CarritoController{
     constructor(){
+        this.precio_total = document.getElementById("precio_total")
         this.listaCarrito = []
         this.contenedor_carrito = document.getElementById("contenedor_carrito")
     }
 
+    calcularTotalYMostrarEnDOM(){
+        let total = 0;
+        total = this.listaCarrito.reduce((total, producto) => total + producto.cantidad * prodcuto.precio, 0)
+        this,precio_total.innerHTML = `Total a pagar: $${total}`;
+    }
+
+    verificarSiExisteElProducto(producto){
+        return this.listaCarrito.find((elproducto)=> elproducto.id == producto.id)
+    }
+
     agregar(producto){
-        this.listaCarrito.push(producto)
+
+        let objeto = this.verificarSiExisteElProducto(prodcuto)
+
+        if (objeto){
+            objeto.cantidad += 1;
+        }else{
+            this.listaCarrito.push(producto)
+        }
+        
+    }
+
+    limpiarCarritoEnStorage(){
+        localStorage.removeItem("listaCarrito")
     }
 
     guardarEnStorage(){
@@ -82,6 +125,14 @@ class CarritoController{
 
     limpiarContenedor_Carrito(){
         this.contenedor_carrito.innerHTML = ""
+    }
+
+    borrar(producto){
+        let posicion = this.listaCarrito.findIndex(miProducto => producto.id == miProducto.id)
+
+        if (  !(posicion == -1)  ){
+            this.listaCarrito.splice(posicion, 1)
+        }
     }
 
     mostrarEnDOM(){
@@ -104,16 +155,43 @@ class CarritoController{
                 </div>
             </div>`
         })
+
+        this.listaCarrito.forEach(producto => {
+            const btnBorrar = document.getElementById(`borrar-${producto.id}`)
+
+            btnBorrar.addEventListener("click", ()=>{
+                this.borrar(producto)
+                this.guardarEnStorage()
+                this.mostrarEnDOM()
+            })
+        })
+        this.calcularTotalYMostrarEnDOM()
     }
 }
 
 const controladorProductos = new ProductoController()
-controladorProductos.levantarProductos()
-
 const controladorCarrito = new CarritoController()
+
+controladorProductos.levantar_y_mostrar(controladorCarrito)
 
 controladorCarrito.verificarExistenciaEnStorage()
 
-controladorProductos.mostrarEnDOM()
+const finalizar_compra = document.getElementById("finalizar_compra")
 
-controladorProductos.darEventoClickAProductos(controladorCarrito)
+
+finalizar_compra.addEventListener("click", ()=> {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Compra realizada con éxito!',
+        showConfirmButton: false,
+        timer: 2000
+    })
+
+    controladorCarrito.limpiarContenedor_Carrito()
+
+    controladorCarrito.limpiarCarritoEnStorage()
+
+    controladorCarrito.listaCarrito = []
+})
+
