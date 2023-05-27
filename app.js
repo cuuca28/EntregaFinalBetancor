@@ -18,11 +18,11 @@ class ProductoController{
     }
 
     async levantar_y_mostrar(controladorCarrito){
-        const resp = await fetch("www.growshop.json")
-        this.listaProductos = await resp.json()
+        const resp = await fetch("productos.json");
+        this.listaProductos = await resp.json();
 
-        this.mostrarEnDOM()
-        this.darEventoClickAProductos(controladorCarrito)
+        this.mostrarEnDOM();
+        this.darEventoClickAProductos(controladorCarrito);
     }
 
     levantarProductos(){
@@ -35,10 +35,10 @@ class ProductoController{
             new Producto(6, "Maceta", 130, 10, "./assets/img/maceta.webp", "Maceta tamaño mediano", "maceta mediana"),
             new Producto(7, "Tierra", 1600, 10, "./assets/img/tierra.webp", "Bolsa de tierra 25 kg", "tierra"),
             new Producto(8, "Sobre bóveda 62%", 250, 10, "./assets/img/boveda-62.webp", "Sobre bóveda para mantener humedad al 62%", "sobre boveda 62%")
-        ]
+        ];
     }
 
-    mostrarEnDOM(){
+    mostrarEnDOM() {
         this.listaProductos.forEach(producto => {
             this.contenedor_productos.innerHTML += `
             <div class="card border-primary" style="width: 18rem;">
@@ -49,8 +49,8 @@ class ProductoController{
                     <p class="card-text">Precio: $${producto.precio}</p>
                     <a href="#" id="cpu-${producto.id}" class="btn btn-primary">Añadir al carrito</a>
                 </div>
-            </div>`
-        })
+            </div>`;
+        });
     }
 
     darEventoClickAProductos(controladorCarrito){
@@ -58,7 +58,7 @@ class ProductoController{
             const btnAP = document.getElementById(`cpu-${producto.id}`)
             btnAP.addEventListener("click", () => {
                 
-                controladorCarrito.agregar(producto)
+                controladorCarrito.agregar(producto);
                 controladorCarrito.guardarEnStorage()
                 controladorCarrito.mostrarEnDOM(contenedor_carrito)
 
