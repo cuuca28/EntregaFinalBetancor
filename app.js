@@ -150,6 +150,7 @@ class CarritoController{
                             <p class="card-text">Descripcion: ${producto.descripcion}</p>
                             <p class="card-text">Precio: $${producto.precio}</p>
                             <p class="card-text">Cantidad: ${producto.cantidad}</p>
+                            <button id="borrar-${producto.id}" class="btn btn-danger">Borrar </button>
                         </div>
                     </div>
                 </div>
