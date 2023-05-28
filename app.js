@@ -193,8 +193,8 @@ finalizar_compra.addEventListener("click", ()=> {
 
     controladorCarrito.limpiarCarritoEnStorage()
 
-    controladorCarrito.calcularTotalYMostrarEnDOM()
-
     controladorCarrito.listaCarrito = []
+
+    controladorCarrito.calcularTotalYMostrarEnDOM()
 })
 
