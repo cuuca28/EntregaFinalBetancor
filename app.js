@@ -97,7 +97,7 @@ class CarritoController{
 
     agregar(producto){
 
-        let objeto = this.verificarSiExisteElProducto(prodcuto)
+        let objeto = this.verificarSiExisteElProducto(producto)
 
         if (objeto){
             objeto.cantidad += 1;
