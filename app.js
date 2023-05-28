@@ -87,7 +87,7 @@ class CarritoController{
 
     calcularTotalYMostrarEnDOM(){
         let total = 0;
-        total = this.listaCarrito.reduce((total, producto) => total + producto.cantidad * prodcuto.precio, 0)
+        total = this.listaCarrito.reduce((total, producto) => total + producto.cantidad * producto.precio, 0)
         this,precio_total.innerHTML = `Total a pagar: $${total}`;
     }
 
